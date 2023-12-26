@@ -38,7 +38,7 @@ export default function NewForm() {
   }
 
   return (
-    <div className='flex flex-col items-center justify-center m-5 bg-zinc-900'>
+    <div className='flex flex-col items-center justify-center m-5 bg-zinc-900 font-roboto'>
       <h1 className='font-bold bg-blue-100 rounded-md w-[50%] h=[50%] text-center mt-2'>
         New Form
       </h1>
