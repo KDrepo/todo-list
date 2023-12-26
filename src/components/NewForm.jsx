@@ -17,13 +17,24 @@ export default function NewForm() {
   function handleSubmit(e) {
     e.preventDefault();
     if (!item) return;
-    setTodos([...todos, { id: todos.length + 1, text: item }]);
+    setTodos([
+      ...todos,
+      { id: todos.length + 1, text: item, completed: false },
+    ]);
     setItem("");
   }
 
   function handleDelete(id) {
     const newTodos = todos.filter((todo) => todo.id !== id);
     setTodos(newTodos);
+  }
+
+  function handleCheckboxChange(id) {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
   }
 
   return (
@@ -38,7 +49,7 @@ export default function NewForm() {
           type='text'
           value={item}
           onChange={(e) => setItem(e.target.value)}
-          placeholder='Ad todo'
+          placeholder='Add todo'
         />
         <button
           type='submit'
@@ -53,9 +64,14 @@ export default function NewForm() {
               No todos
             </p>
           )}
-
           {todos.map((todo) => (
             <li key={todo.id}>
+              <input
+                type='checkbox'
+                checked={todo.completed}
+                onChange={() => handleCheckboxChange(todo.id)}
+                className='p-2 m-2 border-2 rounded-md'
+              />
               {todo.text}
               <button
                 onClick={() => handleDelete(todo.id)}
